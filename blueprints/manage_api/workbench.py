@@ -14,7 +14,7 @@ from ..Models.UserModel import ManageUser
 bp = Blueprint('workbench', __name__)
 
 
-@bp.route('/', methods=['GET'])
+@bp.route('/info', methods=['GET'])
 def getWorkBeachData():
     # 使用filter_by来筛选name匹配且department不等于“小程序用户”
     order_count = Order.query.count()
