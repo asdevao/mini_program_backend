@@ -2,7 +2,7 @@
 Author: asdevao 1097802349@qq.com
 Date: 2024-10-25 16:02:16
 LastEditors: asdevao 1097802349@qq.com
-LastEditTime: 2024-12-28 21:34:59
+LastEditTime: 2025-01-02 19:14:43
 FilePath: \apps\settings.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -20,7 +20,7 @@ getenv = maybe(getenv_)
 # 数据库配置
 HOSTNAME = getenv("HOSTNAME").value_or("localhost")
 PORT = getenv("PORT").value_or("3306")
-DATABASE = getenv("DATABASE").value_or("smart_data")
+DATABASE = getenv("DATABASE").value_or("mini_program")
 USERNAME = "root"
 PASSWORD = getenv("PASSWORD").value_or("123456")
 DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
