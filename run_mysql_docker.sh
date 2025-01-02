@@ -50,5 +50,13 @@ docker run -d \
   -v /usr/local/docker_data/mysql/sql:/docker-entrypoint-initdb.d/ \
   mysql:8.0
 
+# 等待 MySQL 容器启动并初始化
+echo "等待 MySQL 容器启动..."
+sleep 5  # 等待 MySQL 启动
+
+# 进入 MySQL 容器并创建数据库
+echo "进入 MySQL 容器并创建 mini_program 数据库..."
+docker exec -i mysql mysql -u root -p123456 -e "CREATE DATABASE IF NOT EXISTS mini_program;"  
+
 # 查看容器日志
 docker logs mysql
