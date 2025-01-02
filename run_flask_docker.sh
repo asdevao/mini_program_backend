@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # 项目 Git 仓库地址
-GIT_REPO_URL="https://github.com/asdevao/mini_program_project"
-PROJECT_DIR="mini_program_project"
+GIT_REPO_URL="https://github.com/asdevao/mini_program_backend"
+PROJECT_DIR="mini_program_backend"
 CONTAINER_NAME="flaskProject"
 IMAGE_NAME="flaskproject"
 PORT=5103  # 宿主机的端口 5103 映射到容器 5000 端口
+BRANCH_NAME="server-backend"  # 要拉取的分支名称
 
 # 检查是否已有同名容器存在，如果存在则停止并删除
 if [ $(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
@@ -26,7 +27,7 @@ fi
 
 # 克隆 Git 仓库
 echo "克隆项目代码..."
-git clone $GIT_REPO_URL
+git clone --branch $BRANCH_NAME $GIT_REPO_URL
 
 # 进入项目目录
 cd $PROJECT_DIR
