@@ -31,7 +31,7 @@ nginx
 # 确保 dist 目录已经构建
 if [ -d "dist" ]; then
   echo "正在拷贝前端构建文件到容器挂载目录..."
-  cp -r dist /opt/project/nginx_5101/apps
+  cp -r ../dist /opt/project/nginx_5101/apps
   echo "代码文件成功拷贝到容器挂载目录。"
 else
   echo "错误：dist 目录不存在，请先构建项目。"
