@@ -3,7 +3,7 @@
  # @Author: asdevao 1097802349@qq.com
  # @Date: 2024-12-30 22:03:37
  # @LastEditors: asdevao 1097802349@qq.com
- # @LastEditTime: 2025-01-02 20:06:44
+ # @LastEditTime: 2025-01-02 20:14:40
  # @FilePath: \deploy-scripts\run_nginx_docker.sh
  # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 ### 
@@ -36,16 +36,11 @@ docker run -d --name nginx_5101 --network my_network -p 5101:80 \
 -v /opt/project/nginx_5101/log:/var/log/nginx \
 nginx
 
-# 确保 dist 目录已经构建
-if [ -d "./dist" ]; then
-  echo "正在拷贝前端构建文件到容器挂载目录..."
 
-  # 检查目标路径 /opt/project/nginx_5101/apps 下是否已有 dist 目录，若有则删除
-  if [ -d "/opt/project/nginx_5101/apps/dist" ]; then
-    echo "目标路径下已有 dist 目录，正在删除..."
-    rm -rf /opt/project/nginx_5101/apps/dist
-  fi
-  cp -r ./dist /opt/project/nginx_5101/apps
+# 确保 dist 目录已经构建
+if [ -d "dist" ]; then
+  echo "正在拷贝前端构建文件到容器挂载目录..."
+  cp -r dist /opt/project/nginx_5101/apps
   echo "代码文件成功拷贝到容器挂载目录。"
 else
   echo "错误：dist 目录不存在，请先构建项目。"
