@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # 项目 Git 仓库地址
-GIT_REPO_URL="https://github.com/asdevao/mini_program_backend"
+# GIT_REPO_URL="https://github.com/asdevao/mini_program_backend"
+GIT_REPO_URL="git@github.com:asdevao/mini_program_backend.git"
 PROJECT_DIR="mini_program_backend"
 CONTAINER_NAME="flaskProject"
 IMAGE_NAME="flaskproject"
