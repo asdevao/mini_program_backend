@@ -28,6 +28,15 @@ else
   echo "网络 my_network 已存在，跳过创建..."
 fi
 
+# 删除并覆盖 nginx.conf 文件
+if [ -f "/opt/project/nginx_5101/conf/nginx.conf" ]; then
+  echo "配置文件 nginx.conf 已存在，正在删除并覆盖..."
+  rm -f /opt/project/nginx_5101/conf/nginx.conf
+fi
+
+echo "复制当前目录下的 nginx.conf 配置文件..."
+cp ./nginx.conf /opt/project/nginx_5101/conf/
+
 # 启动 nginx 容器并连接到 my_network 网络
 docker run -d --name nginx_5101 --network my_network -p 5101:80 \
 -v /opt/project/nginx_5101/apps/dist:/usr/share/nginx/html \
