@@ -1,4 +1,12 @@
 #!/bin/bash
+###
+ # @Author: asdevao 1097802349@qq.com
+ # @Date: 2024-12-30 22:03:37
+ # @LastEditors: asdevao 1097802349@qq.com
+ # @LastEditTime: 2025-01-02 23:23:17
+ # @FilePath: \deploy-scripts\run_flask_docker.sh
+ # @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+### 
 
 # 项目 Git 仓库地址
 # GIT_REPO_URL="https://github.com/asdevao/mini_program_backend"
