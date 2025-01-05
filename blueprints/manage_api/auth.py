@@ -68,7 +68,24 @@ def register():
         'username': new_user.name
     })
 
+# 邮箱验证
+@bp.route('/send-email', methods=['POST'])
+def send_email():
+    data = request.get_json()
+    email = data.get('email')
+    # 实例化 EmailUtil 类
+    email_util = EmailUtil(current_app.extensions['mail'])
 
+    # 发送验证码
+    result = email_util.send_verification_code(email)
+
+    # 从 Response 对象中提取 JSON 数据
+    result_json = result.get_json()
+
+    if result_json['code'] == 0:
+        return ResponseUtil.success('验证码发送成功！')
+    else:
+        return ResponseUtil.error(result_json['message'])
 # 登录
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

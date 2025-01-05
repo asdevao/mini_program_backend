@@ -2,7 +2,7 @@
 Author: asdevao 1097802349@qq.com
 Date: 2024-10-25 16:02:16
 LastEditors: asdevao 1097802349@qq.com
-LastEditTime: 2024-12-28 21:34:59
+LastEditTime: 2025-01-05 21:10:39
 FilePath: \apps\settings.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -30,9 +30,9 @@ MAIL_SERVER = "smtp.qq.com"
 MAIL_PORT = 465  # 使用 SSL 端口
 MAIL_USE_TLS = False  # 不使用 STARTTLS
 MAIL_USE_SSL = True  # 使用 SSL
-MAIL_USERNAME = getenv("MAIL_USERNAME")
-MAIL_PASSWORD = getenv("MAIL_PASSWORD")
-MAIL_DEFAULT_SENDER = getenv("MAIL_DEFAULT_SENDER")
+MAIL_USERNAME = getenv("MAIL_USERNAME").value_or("1097802349@qq.com")
+MAIL_PASSWORD = getenv("MAIL_PASSWORD").value_or("lrnzfzhewjnlidjd")
+MAIL_DEFAULT_SENDER = getenv("MAIL_DEFAULT_SENDER").value_or("1097802349@qq.com")
 
 # Redis 配置
 REDIS_URL = getenv("REDIS_URL").value_or("redis://localhost:6379/0")
