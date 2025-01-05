@@ -20,7 +20,7 @@ getenv = maybe(getenv_)
 # 数据库配置
 HOSTNAME = getenv("HOSTNAME").value_or("localhost")
 PORT = getenv("PORT").value_or("3306")
-DATABASE = getenv("DATABASE").value_or("smart_data")
+DATABASE = getenv("DATABASE").value_or("mini_program")
 USERNAME = "root"
 PASSWORD = getenv("PASSWORD").value_or("123456")
 DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
