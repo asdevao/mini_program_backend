@@ -18,7 +18,7 @@ load_dotenv()
 getenv = maybe(getenv_)
 
 # 数据库配置
-HOSTNAME = getenv("HOSTNAME").value_or("localhost")
+HOSTNAME = getenv("HOSTNAME").value_or("mysql")
 PORT = getenv("PORT").value_or("3306")
 DATABASE = getenv("DATABASE").value_or("mini_program")
 USERNAME = "root"
