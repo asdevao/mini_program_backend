@@ -68,6 +68,7 @@ def register():
         'username': new_user.name
     })
 
+
 # 邮箱验证
 @bp.route('/send-email', methods=['POST'])
 def send_email():
@@ -86,6 +87,8 @@ def send_email():
         return ResponseUtil.success('验证码发送成功！')
     else:
         return ResponseUtil.error(result_json['message'])
+
+
 # 登录
 @bp.route('/login', methods=['GET', 'POST'])
 def login():

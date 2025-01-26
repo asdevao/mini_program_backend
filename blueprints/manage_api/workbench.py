@@ -1,11 +1,3 @@
-'''
-Author: asdevao 1097802349@qq.com
-Date: 2025-01-02 17:23:15
-LastEditors: asdevao 1097802349@qq.com
-LastEditTime: 2025-01-05 22:04:02
-FilePath: \新建文件夹\mini_program_backend\blueprints\manage_api\workbench.py
-Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
-'''
 from flask import Blueprint, session
 from ..Models.OrderModel import Order
 from ..utils.response_util import ResponseUtil

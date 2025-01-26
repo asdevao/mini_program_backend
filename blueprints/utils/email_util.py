@@ -92,7 +92,7 @@ class EmailUtil:
         if email_template is None:
             with open(email_template_path, 'r', encoding='utf-8') as f:
                 email_template = f.read()
-
+        print(f"Formatted email template: {email_template.format('注册账号', verification_code)}")
         msg = Message(
             subject=subject,
             sender="1097802349@qq.com",

@@ -28,6 +28,7 @@ def process_order_item(order):
 
     # 根据前18位 order_id 查询 member_address 表
     member_address = MemberAddress.query.filter(MemberAddress.id == order_id_prefix).first()
+    print(member_address)
     full_Location = f'{member_address.fullLocation}{member_address.address}'
 
     # 构造单条订单数据

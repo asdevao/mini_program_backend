@@ -5,11 +5,12 @@ from blueprints import db
 from ..Models.HomeModel import BannerData, MutliData, HotMutliData, NewData, GuessLikeData, VideoGroup, \
     Video
 import ast
+
 # 获取当前脚本所在的目录
-current_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir = os.path.dirname(__file__)
 
 # 配置上传文件存储路径，通过 os.path.join 动态构建路径
-UPLOAD_FOLDER = os.path.join(current_dir, 'static', 'video')
+UPLOAD_FOLDER = os.path.join('static', 'video')
 
 bp = Blueprint('home', __name__)
 
@@ -170,8 +171,6 @@ def get_guessLike_data():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
 
 
 # 允许的视频文件扩展名
