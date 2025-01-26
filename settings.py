@@ -18,11 +18,11 @@ load_dotenv()
 getenv = maybe(getenv_)
 
 # 数据库配置
-HOSTNAME = getenv("HOSTNAME").value_or("mysql")
-PORT = getenv("PORT").value_or("3306")
-DATABASE = getenv("DATABASE").value_or("mini_program")
+HOSTNAME = "mysql"
+PORT = "3306"
+DATABASE = "mini_program"
 USERNAME = "root"
-PASSWORD = getenv("PASSWORD").value_or("123456")
+PASSWORD = "123456"
 DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
 
 # 邮箱配置
@@ -30,9 +30,9 @@ MAIL_SERVER = "smtp.qq.com"
 MAIL_PORT = 465  # 使用 SSL 端口
 MAIL_USE_TLS = False  # 不使用 STARTTLS
 MAIL_USE_SSL = True  # 使用 SSL
-MAIL_USERNAME = getenv("MAIL_USERNAME").value_or("1097802349@qq.com")
-MAIL_PASSWORD = getenv("MAIL_PASSWORD").value_or("lrnzfzhewjnlidjd")
-MAIL_DEFAULT_SENDER = getenv("MAIL_DEFAULT_SENDER").value_or("1097802349@qq.com")
+MAIL_USERNAME = "1097802349@qq.com"
+MAIL_PASSWORD = "lrnzfzhewjnlidjd"
+MAIL_DEFAULT_SENDER = "1097802349@qq.com"
 
 # Redis 配置
 REDIS_URL = getenv("REDIS_URL").value_or("redis://localhost:6379/0")
@@ -42,8 +42,8 @@ CELERY_BROKER_URL = getenv("CELERY_BROKER_URL").value_or("redis://localhost:6379
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND").value_or("redis://localhost:6379/0")
 
 # 其他配置
-SECRET_KEY = getenv("SECRET_KEY").value_or("sdfsadfskrwerfj1233453345")
-SESSION_COOKIE_NAME = getenv("SESSION_COOKIE_NAME").value_or("flask_session")
+SECRET_KEY = "sdfsadfskrwerfj1233453345"
+SESSION_COOKIE_NAME = "flask_session"
 JSON_AS_ASCII = getenv("JSON_AS_ASCII").value_or(False)
 
 # 读取 SQLAlchemy 配置

@@ -5,14 +5,12 @@
 .idea/
 
 # Eclipse
-.project
-.classpath
-
-# Sublime Text
 *.sublime-project
 *.sublime-workspace
 
 .venv
+.env
+
 __pycache__
 *.pyc
 *.pyo
