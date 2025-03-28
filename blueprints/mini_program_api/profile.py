@@ -15,7 +15,7 @@ AVATAR_URL = "https://pcapi-xiaotuxian-front.itheima.net/member/profile/avatar"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # 配置 JSON 数据文件的路径
-JSON_PATH = os.path.join(current_dir, 'static', 'data', '省市县.json')
+JSON_PATH = os.path.join('static', 'data', '省市县.json')
 
 
 # 获取会员信息

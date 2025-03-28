@@ -5,7 +5,7 @@ from flask import Blueprint, request, session, current_app
 from blueprints import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..Models.UserModel import ManageUser
-from ..utils.email_util import EmailUtil
+from ..utils.mini_program_email_util import EmailUtilMiniProgram
 from ..utils.token import Token  # 导入 Token 类
 from ..utils.response_util import ResponseUtil
 
@@ -28,8 +28,8 @@ def register():
     random_number = random.randint(100000, 999999)
     nickname, mobile, department, dept_id, role_code = f"云上用户{random_number}", '', '', 0, 'admin'
 
-    # 实例化 EmailUtil类
-    email_util = EmailUtil(current_app.extensions['mail'])
+    # 实例化 EmailUtilMiniProgram
+    email_util = EmailUtilMiniProgram(current_app.extensions['mail'])
 
     # 校验验证码
     verify_response = email_util.validate_verification_code(email, input_code)
@@ -209,3 +209,4 @@ def updateUser():
         })
 
     return ResponseUtil.error('token鉴权失败', code=401)
+

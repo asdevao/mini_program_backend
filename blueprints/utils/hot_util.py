@@ -1,3 +1,4 @@
+from sqlalchemy import cast, Integer
 def load_data_from_db(model, sub_type=None, page_size=10, page=1):
     """
     从数据库加载数据，并根据查询参数进行筛选和分页处理。
@@ -20,10 +21,9 @@ def load_data_from_db(model, sub_type=None, page_size=10, page=1):
     # 查询所有符合条件的记录
     query = model.query
     if sub_type:
-        # 筛选符合 sub_type 的数据（按子类别 ID 和 sub_type 匹配）
+        sub_type_str = str(sub_type)  # 确保 sub_type 是字符串
         query = query.filter(
-            model.sub_id.startswith(str(sub_type)[:-1]),
-            model.sub_id < sub_type
+            cast(model.sub_id, Integer).in_([int(sub_type_str[:-1] + "1"), int(sub_type_str[:-1] + "2")])
         )
 
     # 获取所有记录

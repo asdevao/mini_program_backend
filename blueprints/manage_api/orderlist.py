@@ -2,7 +2,7 @@ from flask import Blueprint, request
 
 from blueprints import db
 from ..utils.orderlist_util import process_order_item
-
+from sqlalchemy import desc
 from ..utils.response_util import ResponseUtil
 from ..Models.OrderModel import Order
 
@@ -20,8 +20,11 @@ def get_tasks():
     total_records = Order.query.count()
     todoTasks = Order.query.filter(Order.order_state == 2).count()
     completedTasks = Order.query.filter(Order.order_state == 5).count()
-    # 分页处理
-    orders = Order.query.offset((page - 1) * page_size).limit(page_size).all()
+    # 分页处理，按 payLatestTime 降序排序
+    orders = Order.query.order_by(desc(Order.pay_latest_time)) \
+        .offset((page - 1) * page_size) \
+        .limit(page_size) \
+        .all()
     # 初始化返回数据
     result = {
         "counts": total_records,
@@ -54,8 +57,11 @@ def getConsignment():
     # 如果提供了订单号，进行筛选
     if order_number:
         query = query.filter(Order.order_id.like(f'%{order_number}%'))
-    # 获取分页数据
-    orders = query.offset((page - 1) * pageSize).limit(pageSize).all()
+    # 分页处理，按 payLatestTime 降序排序
+    orders = Order.query.order_by(desc(Order.pay_latest_time)) \
+        .offset((page - 1) * pageSize) \
+        .limit(pageSize) \
+        .all()
     # 初始化返回数据
     result = {
         "pages": (todoTasks + pageSize - 1) // pageSize,  # 总页数
@@ -86,3 +92,4 @@ def Consignment(id):
     except Exception as e:
         db.session.rollback()  # 如果发生异常，回滚事务
         return ResponseUtil.error(f"数据库操作失败: {str(e)}")
+

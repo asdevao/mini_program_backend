@@ -33,7 +33,6 @@ MAIL_USE_SSL = True  # 使用 SSL
 MAIL_USERNAME = "1097802349@qq.com"
 MAIL_PASSWORD = "lrnzfzhewjnlidjd"
 MAIL_DEFAULT_SENDER = "1097802349@qq.com"
-
 # Redis 配置
 REDIS_URL = getenv("REDIS_URL").value_or("redis://localhost:6379/0")
 
@@ -44,7 +43,8 @@ CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND").value_or("redis://localh
 # 其他配置
 SECRET_KEY = "sdfsadfskrwerfj1233453345"
 SESSION_COOKIE_NAME = "flask_session"
-JSON_AS_ASCII = getenv("JSON_AS_ASCII").value_or(False)
+JSON_AS_ASCII = False
+
 
 # 读取 SQLAlchemy 配置
 SQLALCHEMY_DATABASE_URI = DB_URI
@@ -53,4 +53,3 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False  # 禁用对象修改追踪，避免性�
 # 输出配置（可选，用于调试）
 print("DB_URI:", DB_URI)
 print("MAIL_SERVER:", MAIL_SERVER)
-print("REDIS_URL:", REDIS_URL)
