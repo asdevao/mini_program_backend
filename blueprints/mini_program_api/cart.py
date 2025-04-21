@@ -9,7 +9,7 @@ bp = Blueprint('cart', __name__)
 
 
 # 查询商品数据并返回匹配的行
-@bp.route('/', methods=['GET'])
+@bp.route('/cart', methods=['GET'])
 def get_cart_data():
     """
       从数据库中查询购物车数据并返回 JSON 格式
@@ -59,7 +59,7 @@ def get_cart_data():
 
 
 # 加入购物车
-@bp.route('/', methods=['POST'])
+@bp.route('/cart', methods=['POST'])
 def add_cart_data():
     try:
         # 从前端接收数据
@@ -119,7 +119,7 @@ def add_cart_data():
 
 
 # 删除购物车单品
-@bp.route('/', methods=['DELETE'])
+@bp.route('/cart', methods=['DELETE'])
 def delete_cart_data():
     """
     删除购物车中指定的 SKU ID 集合。
@@ -164,7 +164,7 @@ def delete_cart_data():
         return jsonify({"msg": f"Error occurred: {str(e)}"}), 500
 
 
-@bp.route('/<skuId>', methods=['PUT'])
+@bp.route('/cart/<skuId>', methods=['PUT'])
 def update_cart_item(skuId):
     """
     更新购物车中指定 SKU ID 的商品信息。
@@ -231,7 +231,7 @@ def update_cart_item(skuId):
         return jsonify({"msg": f"Error occurred: {str(e)}"}), 500
 
 
-@bp.route('/selected', methods=['PUT'])
+@bp.route('/cart/selected', methods=['PUT'])
 def update_cart_selected():
     """
     更新购物车中所有商品的选择状态。

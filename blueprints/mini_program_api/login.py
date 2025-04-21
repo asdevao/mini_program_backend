@@ -4,7 +4,7 @@ from ..Models.UserLoginModel import UserDataWithPhoneNumber
 bp = Blueprint('login', __name__)
 
 
-# 广告区域-小程序 轮播图
+
 @bp.route('/wxMin/simple', methods=['GET','POST'])
 def login():
     try:

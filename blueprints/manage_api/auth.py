@@ -130,7 +130,7 @@ def getUserInfo():
             'roles': user.role_code,
             'userId': user.uuid,
             'username': user.name,
-            'realName': user.name,
+            'realName': user.nickname,
             'avatar': '',
             'desc': ''
         })

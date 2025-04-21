@@ -19,7 +19,7 @@ JSON_PATH = os.path.join('static', 'data', '省市县.json')
 
 
 # 获取会员信息
-@bp.route('/', methods=['GET'])
+@bp.route('/profile', methods=['GET'])
 def get_member_profile():
 
     """
@@ -70,7 +70,7 @@ def get_member_profile():
 
 
 # 更新会员信息的接口
-@bp.route('/', methods=['PUT'])
+@bp.route('/profile', methods=['PUT'])
 def update_member_profile():
     """
     校验 token 后更新会员信息并保存至数据库。
@@ -186,7 +186,7 @@ def update_member_profile():
 
 
 # 更新头像
-@bp.route('/avatar', methods=['POST'])
+@bp.route('/profile/avatar', methods=['POST'])
 def update_avatar():
     """
       修改会员头像。

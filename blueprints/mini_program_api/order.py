@@ -1,5 +1,6 @@
 import json
 import uuid
+from sqlalchemy import desc
 from datetime import datetime, timedelta
 from flask import jsonify, Blueprint, request
 from sqlalchemy.exc import SQLAlchemyError
@@ -17,7 +18,7 @@ bp = Blueprint('order', __name__)
 
 
 # 获取订单列表
-@bp.route('/', methods=['GET'])
+@bp.route('/order', methods=['GET'])
 def get_order_data():
     """
         从数据库读取订单数据并返回 JSON 格式，支持分页和订单状态筛选
@@ -50,7 +51,11 @@ def get_order_data():
         total_records = query.count()
 
         # 分页处理
-        orders = query.offset((page - 1) * page_size).limit(page_size).all()
+        orders = query.order_by(desc(Order.pay_latest_time)) \
+        .offset((page - 1) * page_size) \
+        .limit(page_size) \
+        .all()
+
 
         # 初始化返回数据
         result = {
@@ -111,7 +116,7 @@ def get_order_data():
 
 
 # 填写订单-获取预付订单
-@bp.route('/pre', methods=['GET'])
+@bp.route('/order/pre', methods=['GET'])
 def get_pre_order_data():
     """
     获取预订单数据（从本地文件读取）并返回给前端
@@ -273,7 +278,7 @@ def get_pre_order_data():
 
 
 # 填写订单-获取立即购买订单
-@bp.route('/pre/now', methods=['GET'])
+@bp.route('/order/pre/now', methods=['GET'])
 def get_pre_order_now():
     # """
     # 获取预订单数据（根据 skuId、count 和 addressId ）
@@ -455,7 +460,7 @@ def get_pre_order_now():
 
 
 # 提交订单
-@bp.route('/', methods=['POST'])
+@bp.route('/order', methods=['POST'])
 def create_order():
     """
         接收订单数据并返回订单信息
@@ -623,7 +628,7 @@ def create_order():
 
 
 # 获取订单详情
-@bp.route('/<string:order_id>', methods=['GET'])
+@bp.route('/order/<string:order_id>', methods=['GET'])
 def get_order(order_id):
     """
     根据订单 ID 从本地文件读取订单数据并返回
@@ -774,7 +779,7 @@ def get_order(order_id):
 
 
 # 填写订单-获取再次购买订单
-@bp.route('/repurchase/<string:id>', methods=['GET'])
+@bp.route('/order/repurchase/<string:id>', methods=['GET'])
 def repurchase_order(id):
     """
     根据订单 ID 获取数据并返回前端
@@ -928,7 +933,7 @@ def repurchase_order(id):
 
 
 # 模拟发货-
-@bp.route('/consignment/<string:id>', methods=['GET'])
+@bp.route('/order/consignment/<string:id>', methods=['GET'])
 def get_order_consignment(id):
     # """
     #     根据订单 ID 更新订单状态为 3 为待发货，并返回操作成功消息
@@ -1003,7 +1008,7 @@ def get_order_consignment(id):
 
 
 # 确认收货
-@bp.route('/<string:id>/receipt', methods=['PUT'])
+@bp.route('/order/<string:id>/receipt', methods=['PUT'])
 def update_order_receipt(id):
     # """
     # 向接口发送 PUT 请求，获取订单的收货信息，并返回给前端
@@ -1220,7 +1225,7 @@ def update_order_receipt(id):
 
 
 # 删除订单
-@bp.route('/', methods=['DELETE'])
+@bp.route('/order', methods=['DELETE'])
 def delete_orders():
     # """
     # 根据订单 ID 和 token 删除订单
@@ -1295,7 +1300,7 @@ def delete_orders():
 
 
 # 取消订单
-@bp.route('<string:id>/cancel', methods=['PUT'])
+@bp.route('/order/<string:id>/cancel', methods=['PUT'])
 def cancel_order(id):
     # """
     # 根据订单 ID 和取消理由取消订单

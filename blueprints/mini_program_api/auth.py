@@ -13,7 +13,7 @@ from ..utils.response_util import ResponseUtil
 
 bp = Blueprint('auth', __name__)
 
-DEFAULT_AVATAR_URL = "https://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/avatar/2024-05-14/a3bbc2a5-2826-4bd8-b61c-4e9e2f8cc495.jpg"
+DEFAULT_AVATAR_URL = "https://pic28.photophoto.cn/20130830/0022005534713299_b.jpg"
 
 
 # 注册
@@ -143,16 +143,20 @@ def login():
         session['role_code'] = user.role_code
         session['uuid'] = str(user.uuid)
         if mini_programs:
-            # 在 UserDataWithPhoneNumber 表中根据 username 更新对应用户的 token
+             # 在 UserDataWithPhoneNumber 表中根据 username 查找用户
             user_data = UserDataWithPhoneNumber.query.filter_by(account=username).first()
             if user_data:
-                user_data.token = token
-                db.session.commit()  # 提交更新到数据库
-                # 在 member_profile 表中根据 username 或其他标识更新对应用户的 token
-            member_profile = MemberProfileData.query.filter_by(account=username).first()  # 假设 account 字段表示用户名
+                if not user_data.token:  # 仅在 token 为空时生成
+                    user_data.token = Token.generate_token(str(user.uuid))
+                    db.session.commit()  # 提交更新到数据库
+                token = user_data.token  # 直接使用数据库中的 token
+
+            # 在 MemberProfileData 表中更新对应用户的 token
+            member_profile = MemberProfileData.query.filter_by(account=username).first()
             if member_profile:
-                member_profile.token = token
-                db.session.commit()  # 提交更新到数据库
+                if not member_profile.token:  # 仅在 token 为空时生成
+                    member_profile.token = token  # 复用 user_data 生成的 token
+                    db.session.commit()  # 提交更新到数据库
             return ResponseUtil.success(result={
                 'account': user_data.account,
                 'avatar': user_data.avatar,

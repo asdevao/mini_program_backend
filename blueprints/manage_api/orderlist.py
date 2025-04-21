@@ -48,32 +48,41 @@ def get_tasks():
 @bp.route('/consignment', methods=['POST'])
 def getConsignment():
     data = request.json
-    page = data['page']
-    pageSize = data['pageSize']
-    order_number = data['orderNumber']
-    # 查询条件初始化
+    page = data.get('page', 1)  # 添加默认值
+    pageSize = data.get('pageSize', 10)  # 添加默认值
+    orderNumber = data.get('orderNumber', '')  # 修改参数名以匹配前端，添加默认值
+    
+    # 构建基础查询
     query = Order.query.filter(Order.order_state == 2)  # 筛选订单状态为2（待发货）
-    todoTasks = Order.query.filter(Order.order_state == 2).count()
-    # 如果提供了订单号，进行筛选
-    if order_number:
-        query = query.filter(Order.order_id.like(f'%{order_number}%'))
-    # 分页处理，按 payLatestTime 降序排序
-    orders = Order.query.order_by(desc(Order.pay_latest_time)) \
+    
+    # 如果提供了订单号，添加筛选条件
+    if orderNumber:  # 使用新的参数名
+        query = query.filter(Order.order_id.like(f'%{orderNumber}%'))
+    
+    # 获取符合条件的总记录数
+    total_count = query.count()
+    
+    # 应用排序和分页
+    orders = query.order_by(desc(Order.pay_latest_time)) \
         .offset((page - 1) * pageSize) \
         .limit(pageSize) \
         .all()
+    
+    # 计算总页数
+    total_pages = (total_count + pageSize - 1) // pageSize
+    
     # 初始化返回数据
     result = {
-        "pages": (todoTasks + pageSize - 1) // pageSize,  # 总页数
+        "pages": total_pages,
         "page": page,
         "items": []
     }
-    # 遍历查询结果，使用提取的公共函数处理每个订单数据
+    
+    # 处理订单数据
     for order in orders:
         order_item = process_order_item(order)
         result["items"].append(order_item)
 
-    # 返回成功响应
     return ResponseUtil.success(result=result)
 
 

@@ -18,7 +18,7 @@ JSON_PATH = os.path.join( 'static', 'data', '省市县.json')
 
 
 # 获取收货地址列表
-@bp.route('/', methods=['GET'])
+@bp.route('/address', methods=['GET'])
 def get_addresses():
     """
        从数据库中读取会员地址数据并返回给前端。
@@ -68,7 +68,7 @@ def get_addresses():
 
 
 # 获取地址详情
-@bp.route("/<id>", methods=["GET"])
+@bp.route("/address/<id>", methods=["GET"])
 def get_address_by_id(id):
     # """
     # 从 Excel 文件中读取收货地址数据，根据 ID 和 Token 返回符合指定结构的数据。
@@ -153,7 +153,7 @@ def get_address_by_id(id):
         return jsonify({"msg": f"Internal server error: {str(e)}"}), 500
 
 
-@bp.route("/", methods=["POST"])
+@bp.route("/address", methods=["POST"])
 def add_addresses__excel():
     """
     从 Excel 文件中读取地址数据，返回给前端。
@@ -215,7 +215,7 @@ def add_addresses__excel():
 
 
 # 修改收货地址
-@bp.route("/<id>", methods=["PUT"])
+@bp.route("/address/<id>", methods=["PUT"])
 def update_address_by_id(id):
     """
        根据 ID 和 Token 更新收货地址。
@@ -258,7 +258,7 @@ def update_address_by_id(id):
 
 
 # 删除收货地址
-@bp.route("/<id>", methods=["DELETE"])
+@bp.route("/address/<id>", methods=["DELETE"])
 def delete_address(id):
     """
     删除指定收货地址，并返回结果。

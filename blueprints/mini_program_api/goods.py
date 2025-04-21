@@ -9,7 +9,7 @@ bp = Blueprint('goods', __name__)
 
 
 # 定义 /goods 接口
-@bp.route('/', methods=['GET'])
+@bp.route('/goods', methods=['GET'])
 def get_goods():
     # 获取商品 ID 参数
     goods_id = request.args.get("id")
